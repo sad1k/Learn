@@ -14,4 +14,6 @@
 // let user = makeUser();
 
 // alert( user.ref.name ); // Каким будет результат?,
+
+
 будемт undefined так как this будет глобальным объектом, если стрикт то
