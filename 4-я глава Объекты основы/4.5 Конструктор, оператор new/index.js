@@ -80,3 +80,24 @@ function Accumulator(startingValue){
         this.value += num
     }
 }
+
+
+// Constructor, "new" Operator:
+// Basic Constructor Creation:
+// Write a constructor function named Person that takes parameters name and age, and sets them as properties of the object created.
+// Create an instance of Person using the new operator and assign it to a variable named person1. Provide a name and age for the person.
+// Prototype Methods:
+// Add a method sayHello() to the Person constructor which logs "Hello, my name is [name] and I am [age] years old!".
+// Call the sayHello() method on the person1 instance.
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.sayHello = function(){
+        console.log(`Hello my name is ${this.name}`)
+    }
+}
+
+const person1 = new Person('Victor', 54)
+person1.sayHello()
+console.log(person1)
