@@ -2,7 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const driver = new Builder().forBrowser('chrome').build();
 require('dotenv').config();
 
-const path = "http://127.0.0.1:5500/selenium-homework/public/index.html"
+const path = process.env.PATH_TO_HTML
 
 async function openWebsite() {
     try {
