@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+    <style>
+        .form{
+            max-width: 290px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form class="form">
+        <input name="login" id="login" placeholder="Enter your email" type="email" />
+        <input  name="password" id="password" placeholder="Enter your password" type="password" />
+        <div>
+            <input name="checkbox" id="checkbox" type="checkbox" >
+            <label for="checkbox">Сохранить данные для входа</label>
+        </div>
+        <button id="buttonLogin" onclick >Логин</button>
+    </form>
+    <script src="./../src/buttonLogic.js" ></script>
+</body>
+</html>
