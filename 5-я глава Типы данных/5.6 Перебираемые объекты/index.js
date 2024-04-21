@@ -36,3 +36,13 @@ let obj = {
 for(let elem of obj){
 
 }// бесконечный цикл :(
+
+
+let iterator = obj[Symbol.iterator]()
+do{
+   
+}while(!iterator.next().done)
+
+while(!iterator.next().done){
+    
+}
