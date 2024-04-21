@@ -372,3 +372,206 @@ let usersById = groupById(users);
 
 console.log(usersById)
     
+
+
+
+
+
+// 1249. Minimum Remove to Make Valid Parentheses
+// Solved
+// Medium
+// Topics
+// Companies
+// Hint
+// Given a string s of '(' , ')' and lowercase English characters.
+
+// Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) so that the resulting parentheses string is valid and return any valid string.
+
+// Formally, a parentheses string is valid if and only if:
+
+// It is the empty string, contains only lowercase characters, or
+// It can be written as AB (A concatenated with B), where A and B are valid strings, or
+// It can be written as (A), where A is a valid string.
+ 
+
+// Example 1:
+
+// Input: s = "lee(t(c)o)de)"
+// Output: "lee(t(c)o)de"
+// Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+// Example 2:
+
+// Input: s = "a)b(c)d"
+// Output: "ab(c)d"
+// Example 3:
+
+// Input: s = "))(("
+// Output: ""
+// Explanation: An empty string is also valid.
+ 
+
+// Constraints:
+
+// 1 <= s.length <= 105
+// s[i] is either'(' , ')', or lowercase English letter.
+
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var minRemoveToMakeValid = function(s) {
+    let stack = []
+    let indexes = []
+    for(let i = 0; i < s.length; i++){
+        if(s[i] == '('){
+            stack.push([s[i], i])
+        }else if( s[i] == ')'){
+            if(stack.length == 0){
+                indexes.push(i)
+                continue
+            }
+            stack.pop()
+        }
+    }
+    if(stack.length != 0){
+        stack.forEach(elem => indexes.push(elem[1]))
+    }
+    let res = s.split('')
+    indexes.forEach(elem => res.splice(elem, 1, '*'))
+    return res.join('').split('*').join('') 
+};
+
+function findBinary(arr, elem){
+    let left = 0
+    let right = arr.length - 1
+    while(left <= right){
+        let middle = Math.floor((left+right)/2)
+        if(arr[middle] == elem){
+            return middle
+        }else if(arr[middle] > elem){
+            right = middle - 1
+        }else if(arr[middle] < elem){
+            left = middle + 1
+        }
+    }
+    return -1
+}
+
+let arr12 = []
+for(let i = 0; i < 10000000;i++){
+    arr12.push(i)
+}
+let start1 = Date.now()
+findBinary(arr12, 9999999)
+let start2 = Date.now() - start1
+console.log(start2)
+start1 = Date.now()
+arr12.findIndex((elem) => elem == 9999999)
+start3 = Date.now() - start1
+console.log(`Больше в ${start3/start2} раз`)
+
+
+function findFirstEvenIndex(arr) {
+    let left = 0;
+    let right = arr.length - 1;
+    let result = -1;
+    
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        
+        if (arr[mid] % 2 !== 0) {
+            result = mid;
+            left = mid + 1; // продолжаем поиск в правой части
+        } else {
+            right = mid - 1;
+        }
+    }
+    
+    return result + 1; // возвращаем индекс, начиная с которого все числа четные
+}
+
+// Пример использования
+let arr35 = [1, 3, 5, 6, 8, 10];
+console.log("Индекс, начиная с которого все числа четные:", findFirstEvenIndex(arr35));
+
+
+function sortedSquares(arr){
+    let left = 0
+    let right = arr.length - 1
+    let res = []
+    while(let)
+    return res
+}
+
+
+let coords = [2, 5, 7, 11, 15, 20] // координаты стойл
+let k = 3 // число коров
+
+function isCorrect(x) { // проверяем, можно ли поставить K коров в стойла, если между коровами расстояние хотя бы x
+  let cows = 1
+  let lastCow = coords[0]
+  for(let c of coords){
+    if((c - lastCow) >= x){
+      lastCow = c
+      cows++
+    }
+  }
+
+  return cows >= k
+}
+
+function findMaxDistance(){
+    let left = 0 // расставить коров на расстоянии 0 можно всегда так как K < N
+    let right = Math.max(...coords) - Math.min(...coords) + 1 // при таком расстоянии даже 2 коровы не поместяться
+    while(right - left != 1){
+      let mid = Math.floor((right + left)/2)
+      if(isCorrect(mid)){ // проверяем, можно ли поставить K коров в стойла, если между коровами расстояние хотя бы middle
+        left = mid // left всегда должна указывать на ситуацию, когда можно поставить коров
+      }else{
+        right = mid // right всегда должна указывать на ситуацию, когда нельзя поставить коров
+      }
+    }
+    return left // максимальное расстояние, на котором можно расставить коров в стойла
+}
+
+console.log(findMaxDistance())
+
+
+
+// Given string num representing a non-negative integer num, and an integer k, return the smallest possible integer after removing k digits from num.
+
+ 
+
+// Example 1:
+
+// Input: num = "1432219", k = 3
+// Output: "1219"
+// Explanation: Remove the three digits 4, 3, and 2 to form the new number 1219 which is the smallest.
+// Example 2:
+
+// Input: num = "10200", k = 1
+// Output: "200"
+// Explanation: Remove the leading 1 and the number is 200. Note that the output must not contain leading zeroes.
+// Example 3:
+
+// Input: num = "10", k = 2
+// Output: "0"
+// Explanation: Remove all the digits from the number and it is left with nothing which is 0.
+ 
+
+// Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+ 
+
+// Example 1:
+
+
+// Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+// Output: 6
+// Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+// Example 2:
+
+// Input: height = [4,2,0,3,2,5]
+// Output: 9
+ 

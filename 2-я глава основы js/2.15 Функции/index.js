@@ -18,12 +18,10 @@
 // Используя оператор ?
 // Используя оператор ||
 // решение
-function checkAge(age){
-    return (age > 18) || confirm('Родители разрешили?');
-    //  return (age > 18) ? true : confirm('Родители разрешили?');
+function checkAge(age) {
+  return age > 18 || confirm("Родители разрешили?");
+  //  return (age > 18) ? true : confirm('Родители разрешили?');
 }
-
-
 
 // Функция min(a, b)
 // важность: 1
@@ -36,10 +34,9 @@ function checkAge(age){
 // min(1, 1) == 1
 // решение
 
-function min(a,b){
-    return (a > b) ? b : a
+function min(a, b) {
+  return a > b ? b : a;
 }
-
 
 // Функция pow(x,n)
 // важность: 4
@@ -53,9 +50,8 @@ function min(a,b){
 // Запустить демо
 
 // P.S. В этой задаче функция обязана поддерживать только натуральные значения n, т.е. целые от 1 и выше.
-function pow(x, n){
-    if(x > 1 && parseInt(x.toString()) === x){
-        return x ** n
-    }
+function pow(x, n) {
+  if (x > 1 && parseInt(x.toString()) === x) {
+    return x ** n;
+  }
 }
-

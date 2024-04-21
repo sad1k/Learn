@@ -1,4 +1,3 @@
-
 // Выведите чётные числа
 // важность: 5
 // При помощи цикла for выведите чётные числа от 2 до 10.
@@ -7,12 +6,11 @@
 
 // решение
 
-for(let i = 2; i < 11; i++){
-    if(i % 2 == 0){
-        console.log(i)
-    }
+for (let i = 2; i < 11; i++) {
+  if (i % 2 == 0) {
+    console.log(i);
+  }
 }
-
 
 // Замените for на while
 // важность: 5
@@ -23,14 +21,12 @@ for(let i = 2; i < 11; i++){
 // }
 // решение
 
-let i = 0
+let i = 0;
 
-while(i < 3){
-    alert( `number ${i}!` );
-    i++
+while (i < 3) {
+  alert(`number ${i}!`);
+  i++;
 }
-
-
 
 // Повторять цикл, пока ввод неверен
 // важность: 5
@@ -40,12 +36,10 @@ while(i < 3){
 
 // Предполагается, что посетитель вводит только числа. Предусматривать обработку нечисловых строк в этой задаче необязательно.
 
-let number
-do{
-   number = +prompt('Введите число > 100', '')
-
-}while(number === null || number <= 100)
-
+let number;
+do {
+  number = +prompt("Введите число > 100", "");
+} while (number === null || number <= 100);
 
 // Вывести простые числа
 // важность: 3
@@ -61,21 +55,45 @@ do{
 
 // P.S. Код также должен легко модифицироваться для любых других интервалов.
 
-
-
-function isPrime(n){
-    for(let i = 2; i < Math.floor(Math.sqrt(n)) + 1; i++){
-        if(n % i == 0){
-            return false
-        }
+function isPrime(n) {
+  for (let i = 2; i < Math.floor(Math.sqrt(n)) + 1; i++) {
+    if (n % i == 0) {
+      return false;
     }
-    return true
+  }
+  return true;
 }
 
 let n = 10;
 
-for(let i = 2; i < n + 1; i++){
-    if(isPrime(i)){
-        console.log(i)
-    }
+for (let i = 2; i < n + 1; i++) {
+  if (isPrime(i)) {
+    console.log(i);
+  }
 }
+
+var findFarmland = function (land) {
+  const coords = [];
+  function dfs(land, r, c, prevR, prevC) {
+    if (r >= land.length || c >= land[0].length || land[r][c] == 0) {
+      return [prevR, prevC];
+    } else {
+      land[r][c] = 0;
+      const firstCoords = dfs(land, r + 1, c, r, c);
+      const secondCoords = dfs(land, r, c + 1, r, c);
+
+      return [
+        Math.max(firstCoords[0], secondCoords[0]),
+        Math.max(firstCoords[1], secondCoords[1]),
+      ];
+    }
+  }
+
+  for (let i = 0; i < land.length; i++) {
+    for (let j = 0; j < land[0].length; j++)
+      if (land[i][j] == 1) {
+        coords.push([i, j, ...dfs(land, i, j)]);
+      }
+  }
+  return coords;
+};
