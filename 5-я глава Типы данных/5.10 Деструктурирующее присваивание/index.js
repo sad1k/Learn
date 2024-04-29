@@ -50,3 +50,25 @@ console.log(topSalary(salaries))
 console.log(topSalary())
 
 
+// Деструктрурировать массив как объект и получить не undefined значения. 
+// Деструктурировать объект как массив. Какая ошибка появляется? 
+// Применить Symbol.iterator чтобы деструкторизировать без ошибок.
+
+let obj = {
+    a:'1', b:2, c:3,
+    [Symbol.iterator](){
+      let values = Object.values(this)
+      let i = 0
+      return {
+        next(){
+          console.log(values[i])
+          return {done:(i === values.length - 1), value:values[i++]}
+        }
+      }
+    }
+  }
+  
+  let [a, b, c] = obj
+  console.log(a)
+
+
