@@ -33,16 +33,16 @@ describe("myContains Method Tests", () => {
     
     });
 
-    test("test_myContains_with_direct_or_nested_child", () => {
+    test("test myContains with direct or nested child", () => {
       expect(parent.myContains(child)).toBe(true);
       expect(parent.myContains(nestedChild)).toBe(true);
     });
 
-    test("test_myContains_with_non_child_element", () => {
+    test("test myContains with non child element", () => {
       expect(parent.myContains(unrelatedElement)).toBe(false);
     });
 
-    test("test_myContains_with_invalid_this", () => {
+    test("test myContains with invalid this", () => {
       const invalidThis = null;
       const testFunc = () => {
         return invalidThis.myContains(child);
