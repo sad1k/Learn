@@ -247,3 +247,98 @@ console.log(valueC); // должно быть "valueC"
 const valueZ = findValueByKey(obj, "z");
 console.log(valueZ); // должно быть undefined
 
+// getStringCount
+// Реализуйте (с использованием рекурсии) функцию getStringCount, 
+// которая должна принимать массив или объект и считать количество строк в массиве / значениях объекта с учетом вложенности. 
+// P.S. Для корректного прохождения проверку на рекурсию - вы должны вызывать именно функцию getStringCount
+
+function getStringCount(obj){
+  let count = 0
+  if(obj !== null && typeof obj ==='object'){
+    for(let elem of Object.values(obj)){
+      if(typeof elem === 'string'){
+        count += 1
+      }
+      if(typeof elem === 'object'){
+        count += getStringCount(elem)
+      }
+    }
+  }
+  return count
+}
+console.log(getStringCount({
+  first: '1',
+  second: { prop: '2' },
+  third: false,
+  fourth: ['anytime', 2, 3, 4 ],
+  fifth: null,
+})); // 3
+
+
+
+// Реализуйте (с использованием рекурсии) функцию sequenceSum, которая находит сумму последовательности целых чисел. Последовательность задается двумя значениями:
+
+// begin - начало последовательности,
+
+// end - конец последовательности.
+
+// Например: begin = 2 и end = 6 дают нам такую последовательность 2, 3, 4, 5, 6. Сумма такой последовательности будет: 20.
+
+// Подсказки:
+
+// Последовательность, в которой begin > end, не содержит ни одного числа, т.е. является "пустой". Вычислить сумму чисел такой последовательности не представляется возможным, в этом случае возвращаем NaN
+// Сумма чисел последовательности, в которой begin === end, равна begin (или end)
+
+function sequenceSum(begin, end){
+  if(begin > end){
+    return NaN
+  }else{
+    if(begin == end){
+      return end
+    }
+    return begin + sequenceSum(begin + 1, end)
+  }
+}
+console.log(sequenceSum(1, 5)); // 1 + 2 + 3 + 4 + 5 = 15
+console.log(sequenceSum(4, 10)); // 4 + 5 + 6 + 7 + 8 + 9 + 10 = 49
+console.log(sequenceSum(-3, 2)); // (-3) + (-2) + (-1) + 0 + 1 + 2 - -3
+console.log(sequenceSum(7, 2));
+// 0 (т.к. это единственное число, входящее в последовательность)
+console.log(sequenceSum(0, 0));
+// 6 (т.к. это единственное число, входящее в последовательность)
+console.log(sequenceSum(6, 6));
+
+
+// оптимизировать функцию getStringCount из задач на методы массивов, чтобы результат вычисления кешировался в WeakMap
+// разобраться/загуглить что такое циклическая ссылка в объекте, реализовать такой объект, разобраться почему без доработок getStringCount при наличии циклической ссылки в объекте получаем нежелательное поведение (переполнение стека вызовов), 
+// попробовать оптизимизровать решение чтобы захендлить это каким-либо образом и написать комментарий над функцией, 
+// как она работает с циклическими ссылками
+// Опционаольно, желательно после 1 и 2: исследовать как хендлит циклические ссылки метод JSON.stringify на mdn
+
+let cache = new WeakMap()
+let stack = []
+// Берет добавляет в стек объект который обрабатывает потом смотрит его свойства если одно из значений ведет ссылкой на 
+// на объект из стека то это циклическая ссылка выбрасываем ошибку
+function getStringCountOptimized(obj){
+  stack.push(obj)
+  if(cache.has(obj)){
+    return cache.get(obj)
+  }
+  let count = 0
+  if(obj !== null && typeof obj ==='object'){
+    for(let elem of Object.values(obj)){
+      if(stack.includes(elem)){
+        throw new Error('Цикличная ссылка в объекте')
+      }
+      if(typeof elem === 'string'){
+        count += 1
+      }
+      if(typeof elem === 'object'){
+        count += getStringCountOptimized(elem)
+      }
+    }
+  }
+  stack.pop()
+  cache.set(obj, count)
+  return count
+}
