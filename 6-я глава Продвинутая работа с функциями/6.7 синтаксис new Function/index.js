@@ -65,8 +65,32 @@ let filterFunc = new Function('item', `{
 let arr = [{price: 300}, {price: 94}, {price: 15}, {price: 150}]
 console.log(arr.filter(filterFunc))
 
+function abc(){
+
+}
+
+let a = new abc()
+console.log(a)
+
 // Создайте функцию, которая принимает строку с математической функцией (например, "Math.sin(x) + Math.cos(y)") 
 // и возвращает новую функцию, которая вычисляет значение этой функции для заданных значений x и y. 
 // Используйте "new Function" для создания функции.
 let mathematicalFunc = new Function('x,y','return Math.sin(x) + Math.cos(y)')
 console.log(mathematicalFunc(1, 1))
+
+function makeData(){
+    let data = []
+    for(let i = 0; i < 30; i++){
+      let currentDate = new Date();
+      let formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1 + '').padStart(2, '0')}-${(i + 1+ '').padStart(2, '0')}`;
+      data.push({
+        date: formattedDate,
+        count: 1 + i,
+        level: 2
+      })
+    }
+    return data
+  }
+
+  
+console.log(JSON.stringify(makeData()))
